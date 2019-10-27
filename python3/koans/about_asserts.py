@@ -3,6 +3,7 @@
 
 from runner.koan import *
 
+
 class AboutAsserts(Koan):
 
     def test_assert_truth(self):
@@ -10,23 +11,23 @@ class AboutAsserts(Koan):
         We shall contemplate truth by testing reality, via asserts.
         """
 
-        # Confused? This video should help:
-        #
-        #   http://bit.ly/about_asserts
+    # Confused? This video should help:
+    #
+    #   http://bit.ly/about_asserts
 
-        self.assertTrue(False) # This should be True
+        self.assertTrue(True)  # This should be True
 
     def test_assert_with_message(self):
         """
         Enlightenment may be more easily achieved with appropriate messages.
         """
-        self.assertTrue(True "This should be True -- Please fix this")
+        self.assertTrue(True, "This should be True -- Please fix this")
 
     def test_fill_in_values(self):
         """
         Sometimes we will ask you to fill in the values
         """
-        self.assertEqual(self 1 + 1)
+        self.assertEqual(self, 1 + 1)
 
     def test_assert_equality(self):
         """
@@ -70,9 +71,8 @@ class AboutAsserts(Koan):
         #
         # See for yourself:
 
-        self.assertEqual(str, "navel".__class__) # It's str, not <type 'str'>
+        self.assertEqual(str, "navel".__class__)  # It's str, not <type 'str'>
 
         # Need an illustration? More reading can be found here:
         #
         #   https://github.com/gregmalcolm/python_koans/wiki/Class-Attribute
-

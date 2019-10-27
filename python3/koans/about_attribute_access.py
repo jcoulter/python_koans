@@ -13,14 +13,14 @@ class AboutAttributeAccess(Koan):
         pass
 
     def test_calling_undefined_functions_normally_results_in_errors(self):
-        typical = self.TypicalObject()
+        typical = self.TypicalObject(self)
 
-        with self.assertRaises(___): typical.foobar()
+        with self.assertRaises(Koan): typical.foobar(self)
 
     def test_calling_getattribute_causes_an_attribute_error(self):
         typical = self.TypicalObject()
 
-        with self.assertRaises(___): typical.__getattribute__('foobar')
+        with self.assertRaises(Koan): typical.__getattribute__('foobar')
 
         # THINK ABOUT IT:
         #
@@ -30,26 +30,25 @@ class AboutAttributeAccess(Koan):
     # ------------------------------------------------------------------
 
     class CatchAllAttributeReads:
-        def __getattribute__(self, attr_name):
-            return "Someone called '" + attr_name + "' and it could not be found"
+        def __getattribute__(self, Koan):
+            return "Someone called '" + Koan + "' and it could not be found"
 
     def test_all_attribute_reads_are_caught(self):
         catcher = self.CatchAllAttributeReads()
 
-        self.assertRegex(catcher.foobar, __)
+        self.assertRegex(catcher.foobar, self)
 
     def test_intercepting_return_values_can_disrupt_the_call_chain(self):
         catcher = self.CatchAllAttributeReads()
 
-        self.assertRegex(catcher.foobaz, __) # This is fine
+        self.assertRegex(catcher.foobaz, self) # This is fine
 
         try:
             catcher.foobaz(1)
         except TypeError as ex:
             err_msg = ex.args[0]
 
-        self.assertRegex(err_msg, __)
-
+        self.assertRegex(err_msg, self)
         # foobaz returns a string. What happens to the '(1)' part?
         # Try entering this into a python console to reproduce the issue:
         #
